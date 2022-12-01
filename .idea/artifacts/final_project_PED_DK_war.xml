@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="final_project_PED_DK:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>final_project_PED_DK</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="final_project_PED_DK-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="final_project_PED_DK:war exploded" />
+    </root>
+  </artifact>
+</component>
