@@ -20,10 +20,10 @@ public class TodoEdit extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            listTodos(request,response);
+            editTodo(request,response);
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -32,11 +32,17 @@ public class TodoEdit extends HttpServlet {
 
     }
 
-    private void listTodos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void editTodo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         dBManager = new DBmanager();
-        List<Todo> todoList = dBManager.loadTodos();
-        request.setAttribute("TODOS_LIST", todoList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/todosList.jsp");
+        //Recupere Id du boutton
+        String button = request.getParameter("edit");
+        int id = Integer.parseInt(button);
+        String tempDescription = request.getParameter("description");
+        System.out.println("Info bouton" + id );
+        Todo tempTodo = new Todo(id,tempDescription);
+        dBManager.editTodo(tempTodo);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/list-todos");
         dispatcher.forward(request, response);
     }
 

@@ -11,7 +11,6 @@
 </head>
 <% List<Todo> todos = (List<Todo>)request.getAttribute("TODOS_LIST");%>
 <body>
-<%=todos %>
 <div id="wrapper">
     <div id="header">
         <h2>List of TODOS</h2>
@@ -21,28 +20,16 @@
     <div id="content">
         <table>
             <tr>
-                <th>TODO Description </th>
+                <th>TODO Description <form><button type="submit" class="addButton" name="addButton" value="" formaction="load-new">New Todo</button></form></th>
             </tr>
-            <% int i = 0;
-                for(Todo tempTodo:todos) {
-            i++;
+            <%for(Todo tempTodo:todos) {
             %>
             <tr>
-                <td><form><input type="text" id="<%= i %>" value="<%= tempTodo.getTodoDesc() %>" autocomplete= "off"><button type="button" id="<%= i %>">Delete</button></form></td>
+                <td><form action="delete-todos" method="post"><input type="text" name="description" id="text<%=tempTodo.getId()%>" value="<%= tempTodo.getTodoDesc() %>" autocomplete= "off"><button type="submit" class="deleteButton" name="deleteButton" value="<%=tempTodo.getId()%>">Delete</button><button type="submit" class="editButton" name="edit" value="<%=tempTodo.getId()%>" formaction="edit-todos">Edit</Button></form></td>
             </tr>
             <%;} %>
         </table>
     </div>
 </div>
-<form action = "edit-todos">
-    <input type="submit" value="Update">
-
-    <%
-
-
-
-    %>
-
-</form>
 </body>
 </html>

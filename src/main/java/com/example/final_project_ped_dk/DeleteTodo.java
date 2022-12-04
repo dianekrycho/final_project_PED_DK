@@ -13,29 +13,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "todoList", value = "/list-todos")
-public class ListTodos extends HttpServlet {
+@WebServlet(name = "deleteTodo", value = "/delete-todos")
+public class DeleteTodo extends HttpServlet {
 
     private DBmanager dBManager;
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            listTodos(request,response);
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-
-
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            listTodos(request,response);
+            deleteTodo(request,response);
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -44,11 +32,16 @@ public class ListTodos extends HttpServlet {
 
     }
 
-    private void listTodos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void deleteTodo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         dBManager = new DBmanager();
-        List<Todo> todoList = dBManager.loadTodos();
-        request.setAttribute("TODOS_LIST", todoList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/todosList.jsp");
+        //Recupere Id du boutton
+        String button = request.getParameter("deleteButton");
+        int id = Integer.parseInt(button);
+        System.out.println("Info bouton" + id );
+        Todo tempTodo = new Todo(id,"");
+        dBManager.deleteTodo(tempTodo);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/list-todos");
         dispatcher.forward(request, response);
     }
 

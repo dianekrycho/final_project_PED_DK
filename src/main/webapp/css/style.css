@@ -10,7 +10,7 @@ table {
 	margin-left:15px;
 	font-family: Tahoma,Verdana,Segoe,sans-serif;
 	text-align: left;
-	width:30%;
+	width:45%;
 	vertical-align: middle;
 }
  
@@ -36,11 +36,20 @@ td {
 }
 
 input[type=text] {
-	width: 70%;
-	height: 100%;
-	padding: 10px 10px;
-	margin: 8px 0;
-	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+	border-width: 6px;
+	border-color: #9bcaf9;
+	background-color: #ffffff;
+	color: #000000;
+	border-style: solid;
+	border-radius: 1px;
+	box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+	text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+}
+
+input[type=text]:focus{
+	outline:none;
 }
 
 button {
@@ -56,7 +65,7 @@ button {
 }
 
 tr:nth-child(even) {background: white}
-tr:nth-child(odd) {background: #BBBBBB}	
+tr:nth-child(odd) {background: white}
  
 #wrapper {width: 100%; margin-top: 0px; }
 #header {width: 70%; background: black; margin-top: 0px; padding:15px 0px 15px 15px;}
@@ -77,4 +86,66 @@ tr:nth-child(odd) {background: #BBBBBB}
 	
 	margin-bottom: 15px;
 	background: #cccccc;
+}
+.deleteButton{
+	background-color:#8a8787;
+	border-radius:28px;
+	border:1px solid #a80000;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.deleteButton:hover {
+	background-color:#fc0000;
+}
+.deleteButton:active {
+	position:relative;
+	top:1px;
+}
+
+.editButton {
+	background-color:#8a8787;
+	border-radius:28px;
+	border:1px solid #2f6fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.editButton:hover {
+	background-color:#2f6fed;
+}
+.editButton:active {
+	position:relative;
+	top:1px;
+}
+
+.addButton {
+	background-color:#8a8787;
+	border-radius:28px;
+	border:1px solid #44b507;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.addButton:hover {
+	background-color:#44b507;
+}
+.addButton:active {
+	position:relative;
+	top:1px;
 }

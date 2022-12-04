@@ -13,29 +13,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "todoList", value = "/list-todos")
-public class ListTodos extends HttpServlet {
+@WebServlet(name = "addTodo", value = "/add-todo")
+public class addTodo extends HttpServlet {
 
     private DBmanager dBManager;
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        try {
-            listTodos(request,response);
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-
-
-    }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            listTodos(request,response);
+            addTodo(request,response);
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -44,11 +32,13 @@ public class ListTodos extends HttpServlet {
 
     }
 
-    private void listTodos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void addTodo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         dBManager = new DBmanager();
-        List<Todo> todoList = dBManager.loadTodos();
-        request.setAttribute("TODOS_LIST", todoList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/todosList.jsp");
+        String tempDescription = request.getParameter("description");
+        Todo tempTodo = new Todo(0,tempDescription);
+        dBManager.addTodo(tempTodo);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/load-new");
         dispatcher.forward(request, response);
     }
 

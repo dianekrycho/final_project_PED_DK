@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "todoList", value = "/list-todos")
-public class ListTodos extends HttpServlet {
+@WebServlet(name = "loadNew", value = "/load-new")
+public class loadNewTodo extends HttpServlet {
 
     private DBmanager dBManager;
 
@@ -23,7 +23,7 @@ public class ListTodos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            listTodos(request,response);
+            loadJSP(request,response);
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -35,7 +35,7 @@ public class ListTodos extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            listTodos(request,response);
+            loadJSP(request,response);
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -44,12 +44,10 @@ public class ListTodos extends HttpServlet {
 
     }
 
-    private void listTodos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dBManager = new DBmanager();
-        List<Todo> todoList = dBManager.loadTodos();
-        request.setAttribute("TODOS_LIST", todoList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/todosList.jsp");
+    private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/newTodo.jsp");
         dispatcher.forward(request, response);
     }
 
 }
+
