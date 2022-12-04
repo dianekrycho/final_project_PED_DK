@@ -6,12 +6,12 @@ import java.util.List;
 
 
 public class DBmanager {
-    public List<Todo> loadStudents(){
+    public List<Todo> loadTodos(){
         List<Todo> todoDisplay = new ArrayList<Todo>();
         Connection myConn= this.Connector();
         try {
             Statement myStmt= myConn.createStatement();
-            String sql = "select todoDesc from todo";
+            String sql = "select id, todoDesc from todo";
             ResultSet myRs= myStmt.executeQuery(sql);
             while (myRs.next()) {
                 Todo t = new Todo(myRs.getInt("id"),
@@ -24,13 +24,14 @@ public class DBmanager {
         } catch (SQLException e) {
 
             e.printStackTrace();
+
+            return null;
         }
-        return null;
     }
     public Connection Connector(){
         try {
             Connection connection =
-                    DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "password");
+                    DriverManager.getConnection("jdbc:mysql://localhost:3306/finalProject", "root", "password");
             return connection;
         }
         catch (Exception e) {

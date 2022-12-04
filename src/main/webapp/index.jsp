@@ -2,12 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Index</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1><%= "Hello World!" %>
+<h1><%= "Menu" %>
 </h1>
 <br/>
-<a href="hello-servlet">truc machin</a>
+<form action = "list-todos">
+    <input type="submit" value="List all Todos">
+</form>
 </body>
 </html>
