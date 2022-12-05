@@ -117,6 +117,31 @@ public class DBmanager {
         }
     }
 
+    public String checkAccount(Accounts account){
+        Connection myConn= null;
+        PreparedStatement myStmt=null;
+        ResultSet myRs = null;
+        try {
+            myConn = this.Connector();
+            String sql = "select * from accounts where userName =? AND userPassword =?";
+            myStmt = myConn.prepareStatement(sql);
+            myStmt.setString(1, account.getUserName());
+            myStmt.setString(2, account.getUserPassword());
+            myRs = myStmt.executeQuery();
+            myRs.next();
+            String role = myRs.getString("userRole");
+            System.out.println(role);
+            //select * FROM accounts WHERE userName = 'DianeKrychowski' AND userPassword = 'password'
+            return role;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
+        finally{
+            close(myConn,myStmt,myRs);
+        }
+    }
+
     public void addAccount(Accounts account){
         if (account.getUserPassword()== null){
             // COMPLETER

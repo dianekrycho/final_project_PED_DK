@@ -9,7 +9,14 @@
   <title>Todos List</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
-<% List<Todo> todos = (List<Todo>)request.getAttribute("TODOS_LIST");%>
+<% List<Todo> todos = (List<Todo>)request.getAttribute("TODOS_LIST");
+  String name = "";
+  Cookie[] cookies = request.getCookies();
+  for ( int i=0; i<cookies.length; i++) {
+    Cookie cookie = cookies[i];
+    if ("userName".equals(cookie.getName()))
+      name = cookie.getValue();
+  }%>
 <body>
 <div id="wrapper">
   <div id="header">
@@ -18,6 +25,9 @@
 </div>
 <div id="container">
   <div id="content">
+    <form action = "log-out">
+      <input type="submit" value="Logout">  Welcome : <%=name%> </input>
+    </form>
     <td><form action="add-todo" method="post"><input type="text" name="description" id="text" value="" autocomplete= "off"><button type="submit" class="addButton" name="addButton" value="">Add</button></form></td>
   </div>
 </div>

@@ -37,7 +37,9 @@ public class addTodo extends HttpServlet {
         String tempDescription = request.getParameter("description");
         Todo tempTodo = new Todo(0,tempDescription);
         dBManager.addTodo(tempTodo);
-
+        response.setHeader( "Pragma", "no-cache" );
+        response.setHeader( "Cache-Control", "no-cache" );
+        response.setDateHeader( "Expires", 0 );
         RequestDispatcher dispatcher = request.getRequestDispatcher("/load-new");
         dispatcher.forward(request, response);
     }

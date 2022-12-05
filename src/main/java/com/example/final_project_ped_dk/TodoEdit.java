@@ -41,7 +41,9 @@ public class TodoEdit extends HttpServlet {
         System.out.println("Info bouton" + id );
         Todo tempTodo = new Todo(id,tempDescription);
         dBManager.editTodo(tempTodo);
-
+        response.setHeader( "Pragma", "no-cache" );
+        response.setHeader( "Cache-Control", "no-cache" );
+        response.setDateHeader( "Expires", 0 );
         RequestDispatcher dispatcher = request.getRequestDispatcher("/list-todos");
         dispatcher.forward(request, response);
     }

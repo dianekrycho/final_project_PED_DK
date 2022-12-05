@@ -9,7 +9,7 @@
 <h1><%= "Menu" %>
 </h1>
 <br/>
-<form action = "list-todos">
+<form action = "login.jsp">
     <input type="submit" value="List all Todos">
 </form>
 </body>

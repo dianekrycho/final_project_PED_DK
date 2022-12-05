@@ -7,14 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@WebServlet(name = "loadNew", value = "/load-new")
-public class loadNewTodo extends HttpServlet {
+@WebServlet(name = "todoListStudents", value = "/list-todos-students")
+public class ListTodosStudents extends HttpServlet {
 
     private DBmanager dBManager;
 
@@ -23,7 +19,7 @@ public class loadNewTodo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            loadJSP(request,response);
+            listTodos(request,response);
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -35,7 +31,7 @@ public class loadNewTodo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-            loadJSP(request,response);
+            listTodos(request,response);
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -44,13 +40,15 @@ public class loadNewTodo extends HttpServlet {
 
     }
 
-    private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void listTodos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        dBManager = new DBmanager();
+        List<Todo> todoList = dBManager.loadTodos();
+        request.setAttribute("TODOS_LIST", todoList);
         response.setHeader( "Pragma", "no-cache" );
         response.setHeader( "Cache-Control", "no-cache" );
         response.setDateHeader( "Expires", 0 );
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/newTodo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/todosListStudent.jsp");
         dispatcher.forward(request, response);
     }
 
 }
-
