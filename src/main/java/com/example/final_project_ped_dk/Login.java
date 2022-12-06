@@ -1,12 +1,11 @@
 package com.example.final_project_ped_dk;
 
+import com.mysql.cj.Session;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 @WebServlet(name = "login", value = "/login-check")
 public class Login extends HttpServlet {
@@ -37,6 +36,7 @@ public class Login extends HttpServlet {
             if (loginQuery.equals("admin")){
                 Cookie ck=new Cookie("userName",testAccount.getUserName());
                 response.addCookie(ck);
+                request.setAttribute("userName",testAccount.getUserName());
                 response.setHeader( "Pragma", "no-cache" );
                 response.setHeader( "Cache-Control", "no-cache" );
                 response.setDateHeader( "Expires", 0 );
@@ -44,6 +44,9 @@ public class Login extends HttpServlet {
                 dispatcher.forward(request, response);
             } else {
                 Cookie ck=new Cookie("userName",testAccount.getUserName());
+                //HttpSession session = request.getSession();
+                //session.setAttribute("userName",testAccount.getUserName());
+                request.setAttribute("userName",testAccount.getUserName());
                 response.addCookie(ck);
                 response.setHeader( "Pragma", "no-cache" );
                 response.setHeader( "Cache-Control", "no-cache" );

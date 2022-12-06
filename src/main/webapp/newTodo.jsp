@@ -26,7 +26,7 @@
 <div id="container">
   <div id="content">
     <form action = "log-out">
-      <input type="submit" value="Logout">  Welcome : <%=name%> </input>
+      <input type="submit" value="Logout">  Welcome : ${userName} </input>
     </form>
     <td><form action="add-todo" method="post"><input type="text" name="description" id="text" value="" autocomplete= "off"><button type="submit" class="addButton" name="addButton" value="">Add</button></form></td>
   </div>

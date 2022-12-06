@@ -27,7 +27,7 @@ Cookie[] cookies = request.getCookies();
 <div id="container">
     <div id="content">
         <form action = "log-out">
-            <input type="submit" value="Logout">  Welcome : <%=name%> </input>
+            <input type="submit" value="Logout">  Welcome : ${userName} </input>
         </form>
         <table>
             <tr>
