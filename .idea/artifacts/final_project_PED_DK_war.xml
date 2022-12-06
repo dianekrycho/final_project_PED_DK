@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="final_project_PED_DK-1.0-SNAPSHOT.war">
+    <root id="archive" name="ProjectJavaEE-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="final_project_PED_DK:war exploded" />
     </root>
   </artifact>

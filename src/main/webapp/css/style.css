@@ -38,9 +38,12 @@ td {
 input[type=text] {
 	padding: 10px;
 	font-size: 16px;
+	text-align: left;
 	border-width: 6px;
 	border-color: #9bcaf9;
 	background-color: #ffffff;
+	margin-top: 5px;
+	vertical-align: middle;
 	color: #000000;
 	border-style: solid;
 	border-radius: 1px;

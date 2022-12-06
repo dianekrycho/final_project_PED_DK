@@ -9,15 +9,7 @@
     <title>Todos List</title>
     <link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
-<% List<Todo> todos = (List<Todo>)request.getAttribute("TODOS_LIST");
-String name = "";
-Cookie[] cookies = request.getCookies();
-    for ( int i=0; i<cookies.length; i++) {
-        Cookie cookie = cookies[i];
-        if ("userName".equals(cookie.getName()))
-            name = cookie.getValue();
-    }
-%>
+<% List<Todo> todos = (List<Todo>)request.getAttribute("TODOS_LIST");%>
 <body>
 <div id="wrapper">
     <div id="header">

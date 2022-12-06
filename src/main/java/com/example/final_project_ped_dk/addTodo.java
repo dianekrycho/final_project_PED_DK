@@ -1,5 +1,8 @@
 package com.example.final_project_ped_dk;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -19,6 +23,26 @@ public class addTodo extends HttpServlet {
 
     private DBmanager dBManager;
 
+    private DataSource dataSource;
+
+
+    private DataSource getDataSource() throws NamingException {
+        String jndi="java:comp/env/jdbc/finalproject" ;
+        Context context = new InitialContext();
+        DataSource dataSource = (DataSource) context.lookup(jndi);
+        return dataSource;
+    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        try {
+            dataSource= getDataSource();
+            dBManager = new DBmanager(dataSource);
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +65,6 @@ public class addTodo extends HttpServlet {
     }
 
     private void addTodo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dBManager = new DBmanager();
         String tempDescription = request.getParameter("description");
         Todo tempTodo = new Todo(0,tempDescription);
         dBManager.addTodo(tempTodo);
