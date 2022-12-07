@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/finalproject"
+              auth="Container" type="javax.sql.DataSource"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              maxTotal="20" maxIdle="5" maxWaitMillis="10000"
+              username="root" password="password"
+              url="jdbc:mysql://localhost:3306/finalproject?useSSL=false"/>
+
+    <Realm className="org.apache.catalina.realm.DataSourceRealm"
+           DataSourceName="jdbc/finalproject" localDataSource="true" userTable="users"
+           userRoleTable="roles" userNameCol="username" userCredCol="password"
+           roleNameCol="role"/>
+</Context>

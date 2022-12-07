@@ -13,7 +13,7 @@
 <body>
 <div id="wrapper">
     <div id="header">
-        <h2>List of TODOS</h2>
+        <h2>List of TODOS Students</h2>
     </div>
 </div>
 <div id="container">
@@ -23,12 +23,12 @@
         </form>
         <table>
             <tr>
-                <th>TODO Description <form><button type="submit" class="addButton" name="addButton" value="" formaction="load-new">New Todo</button></form></th>
+                <th>TODO Description</th>
             </tr>
             <%for(Todo tempTodo:todos) {
             %>
             <tr>
-                <td><form action="delete-todos" method="post"><input type="text" name="description" id="text<%=tempTodo.getId()%>" value="<%= tempTodo.getTodoDesc() %>" autocomplete= "off"><button type="submit" class="deleteButton" name="deleteButton" value="<%=tempTodo.getId()%>">Delete</button><button type="submit" class="editButton" name="edit" value="<%=tempTodo.getId()%>" formaction="edit-todos">Edit</Button></form></td>
+                <td><form><input type="text" name="description" id="text<%=tempTodo.getId()%>" value="<%= tempTodo.getTodoDesc() %>" autocomplete= "off" readonly></form></td>
             </tr>
             <%;} %>
         </table>

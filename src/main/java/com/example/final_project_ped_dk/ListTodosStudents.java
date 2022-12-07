@@ -12,14 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@WebServlet(name = "todoList", value = "/list-todos")
-public class ListTodos extends HttpServlet {
+@WebServlet(name = "todoListStudents", value = "/list-todos-students")
+public class ListTodosStudents extends HttpServlet {
 
     private DBmanager dBManager;
     private DataSource dataSource;
@@ -62,7 +58,7 @@ public class ListTodos extends HttpServlet {
 
 
     }
-    @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
@@ -88,7 +84,7 @@ public class ListTodos extends HttpServlet {
         response.setHeader( "Pragma", "no-cache" );
         response.setHeader( "Cache-Control", "no-cache" );
         response.setDateHeader( "Expires", 0 );
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/todosList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/todosListStudent.jsp");
         dispatcher.forward(request, response);
     }
 

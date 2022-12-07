@@ -1,15 +1,27 @@
 package com.example.final_project_ped_dk;
 
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
+
+
 public class DBmanager {
+
+
+    private static DataSource datasource;
+    public DBmanager(DataSource theDatasource){
+        datasource = theDatasource;
+    }
+
     public List<Todo> loadTodos(){
         List<Todo> todoDisplay = new ArrayList<Todo>();
-        Connection myConn= this.Connector();
+        Connection myConn = null;
         try {
+            myConn = this.Connector();
             Statement myStmt= myConn.createStatement();
             String sql = "select id, todoDesc from todo";
             ResultSet myRs= myStmt.executeQuery(sql);
@@ -28,10 +40,11 @@ public class DBmanager {
             return null;
         }
     }
+
+
     public Connection Connector(){
         try {
-            Connection connection =
-                    DriverManager.getConnection("jdbc:mysql://localhost:3306/finalProject", "root", "password");
+            Connection connection =  datasource.getConnection();
             return connection;
         }
         catch (Exception e) {
@@ -117,71 +130,24 @@ public class DBmanager {
         }
     }
 
-    public void addAccount(Accounts account){
-        if (account.getUserPassword()== null){
-            // COMPLETER
-        }
-        if (account.getUserName()== null){
-            // COMPLETER
-        }
-        if (account.getUserRole()== null){
-            // COMPLETER
-        }
-        Connection myConn=null;
-        PreparedStatement myStmt = null;
-        ResultSet myRs= null;
+    public String checkAccount(Accounts account){
+        Connection myConn= null;
+        PreparedStatement myStmt=null;
+        ResultSet myRs = null;
         try {
             myConn = this.Connector();
-            String sql = "insert into accounts (userName, userPassword, userRole) values(?, ?,?)";
+            String sql = "select * from roles where userName =?";
             myStmt = myConn.prepareStatement(sql);
             myStmt.setString(1, account.getUserName());
-            myStmt.setString(2, account.getUserPassword());
-            myStmt.setString(3, account.getUserRole());
-            myStmt.execute();
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        finally{
-            close(myConn,myStmt,myRs);
-        }
-    }
-    public void deleteAccount(Accounts account){
-        Connection myConn=null;
-        PreparedStatement myStmt = null;
-        ResultSet myRs= null;
-        String userName = account.getUserName();
-        try {
-            myConn = this.Connector();
-            String sql = "DELETE FROM accounts WHERE userName = ?";
-            myStmt = myConn.prepareStatement(sql);
-            myStmt.setString(1, userName);
-            myStmt.execute();
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        finally{
-            close(myConn,myStmt,myRs);
-        }
-    }
-    public void editPassword(Accounts account){
-        if (account.getUserPassword()== null){
-            // A completer
-        }
-        Connection myConn=null;
-        PreparedStatement myStmt = null;
-        ResultSet myRs= null;
-        try {
-            myConn = this.Connector();
-            String sql = "update accounts set userPassword=? where userName=?";
-            myStmt = myConn.prepareStatement(sql);
-            myStmt.setString(1, account.getUserPassword());
-            myStmt.setString(2, account.getUserName());
-            myStmt.execute();
-        }
-        catch(Exception e){
-            System.out.println(e.getMessage());
+            myRs = myStmt.executeQuery();
+            myRs.next();
+            String role = myRs.getString("role");
+            System.out.println(role);
+            //select * FROM accounts WHERE userName = 'DianeKrychowski' AND userPassword = 'password'
+            return role;
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
         }
         finally{
             close(myConn,myStmt,myRs);
